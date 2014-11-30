@@ -1,0 +1,112 @@
+# -*- coding: utf-8 -*-
+
+########################################################
+#                                                      #
+#  ████████╗███████╗███████╗       █████╗ ██████╗ ██╗  #
+#  ╚══██╔══╝██╔════╝██╔════╝      ██╔══██╗██╔══██╗██║  #
+#     ██║   ███████╗███████╗█████╗███████║██████╔╝██║  #
+#     ██║   ╚════██║╚════██║╚════╝██╔══██║██╔═══╝ ██║  #
+#     ██║   ███████║███████║      ██║  ██║██║     ██║  #
+#     ╚═╝   ╚══════╝╚══════╝      ╚═╝  ╚═╝╚═╝     ╚═╝  #
+#                                                      #                          
+#                          ***                         #
+#  written by: xfl00d / jndok                          #
+#  license: gnu/gpl v3                                 #
+#                                                      #
+#  iNeal API docs: https://api.ineal.me/tss/docs       # 
+#                                                      #
+########################################################
+
+# quick documentation to this library:
+
+# functions that begin with '_err' or '_check' are for error handling/error checking.
+# functions that begin with a double underscore (__) are low-level functions.
+# functions that begin with a sigle underscore (_) are wrappers.
+# function without underscores are high-level functions.
+
+# low-level: makes the request to the server and return the json.
+# wrapper: packs the request in a dictionary/array or other data structures.
+# high-level: interfaces with wrappers to get specific data, based on user input. Only these should be used to interface with the user.
+
+# NOTE: Currently, *only* low-level functions are implemented. I will update the library and add the other sets ASAP.
+
+import requests
+
+__all__ = ['__getAllCurrentlySignedFirmwares', '__getAllFirmwares', '__getAllCurrentlySignedFirmwaresForBoardConfig', '__getAllFirmwaresForBoardConfig', '__getAllFirmwaresForBoardConfigAndBuildID', '__getAllCurrentlySignedBetaFirmwares', '__getAllBetaFirmwares', '__getAllCurrentlySignedBetaFirmwaresForBoardConfig', '__getAllBetaFirmwaresForBoardConfig', '__getAllBetaFirmwaresForBoardConfigAndBuildID', '_wrapAllCurrentlySignedFirmwares']
+
+def _errNotAValidJsonObject():
+	print "[!] Could not decosde JSON object. Make sure your query is valid."
+
+# ****************** #
+
+def __getAllCurrentlySignedFirmwares():		# gets all currently signed firmwares.
+	r = requests.get('https://api.ineal.me/tss/all')
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllFirmwares(): 	# gets all firmwares regardless of the signing state.	
+	r = requests.get('https://api.ineal.me/tss/all/all')
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllCurrentlySignedFirmwaresForBoardConfig(board_config): 	# gets all currently signed firmwares with a specific board configuration.
+	r = requests.get('https://api.ineal.me/tss/{0}'.format(board_config))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllFirmwaresForBoardConfig(board_config): 	# gets all firmwares with a specific board configuration regardless of the signing state.
+	r = requests.get('https://api.ineal.me/tss/{0}/all'.format(board_config))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllFirmwaresForBoardConfigAndBuildID(board_config, build_ID): 	# gets all firmwares with a specific board configuration / build ID combination.
+	r = requests.get('https://api.ineal.me/tss/{0}/{1}'.format(board_config, build_ID))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+# ****************** #
+
+def __getAllCurrentlySignedBetaFirmwares():		# gets all currently signed firmwares.
+	r = requests.get('https://api.ineal.me/tss/beta/all')
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllBetaFirmwares(): 	# gets all firmwares regardless of the signing state.	
+	r = requests.get('https://api.ineal.me/tss/beta/all/all')
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllCurrentlySignedBetaFirmwaresForBoardConfig(board_config): 	# gets all currently signed firmwares with a specific board configuration.
+	r = requests.get('https://api.ineal.me/tss/beta/{0}'.format(board_config))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllBetaFirmwaresForBoardConfig(board_config): 	# gets all firmwares with a specific board configuration regardless of the signing state.
+	r = requests.get('https://api.ineal.me/tss/beta/{0}/all'.format(board_config))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
+
+def __getAllBetaFirmwaresForBoardConfigAndBuildID(board_config, build_ID): 	# gets all firmwares with a specific board configuration / build ID combination.
+	r = requests.get('https://api.ineal.me/tss/beta/{0}/{1}'.format(board_config, build_ID))
+	try:
+		return r.json()
+	except ValueError:
+		_errNotAValidJsonObject()
