@@ -28,14 +28,20 @@
 # wrapper: packs the request in a dictionary/array or other data structures.
 # high-level: interfaces with wrappers to get specific data, based on user input. Only these should be used to interface with the user.
 
-# NOTE: Currently, *only* low-level functions are implemented. I will update the library and add the other sets ASAP.
+# NOTE: Currently, only low-level functions and wrapper functions are implemented. I will update the library and add the other sets ASAP.
 
 import requests
+# from pprint import pprint // debug only
 
-__all__ = ['__getAllCurrentlySignedFirmwares', '__getAllFirmwares', '__getAllCurrentlySignedFirmwaresForBoardConfig', '__getAllFirmwaresForBoardConfig', '__getAllFirmwaresForBoardConfigAndBuildID', '__getAllCurrentlySignedBetaFirmwares', '__getAllBetaFirmwares', '__getAllCurrentlySignedBetaFirmwaresForBoardConfig', '__getAllBetaFirmwaresForBoardConfig', '__getAllBetaFirmwaresForBoardConfigAndBuildID', '_wrapAllCurrentlySignedFirmwares']
+__all__ = ['__getAllCurrentlySignedFirmwares', '__getAllFirmwares', '__getAllCurrentlySignedFirmwaresForBoardConfig', '__getAllFirmwaresForBoardConfig',
+		   '__getAllFirmwaresForBoardConfigAndBuildID', '__getAllCurrentlySignedBetaFirmwares', '__getAllBetaFirmwares', '__getAllCurrentlySignedBetaFirmwaresForBoardConfig',
+		   '__getAllBetaFirmwaresForBoardConfig', '__getAllBetaFirmwaresForBoardConfigAndBuildID', '_wrapAllCurrentlySignedFirmwares', '_wrapAllFirmwares',
+		   '_wrapAllCurrentlySignedFirmwaresForBoardConfig', '_wrapAllFirmwaresForBoardConfig', '_wrapAllFirmwaresForBoardConfigAndBuildID', '_wrapAllFirmwaresForBoardConfigAndBuildID', 
+		   '_wrapAllCurrentlySignedBetaFirmwares', '_wrapAllBetaFirmwares', '_wrapAllCurrentlySignedBetaFirmwaresForBoardConfig', '_wrapAllBetaFirmwaresForBoardConfig', 
+		   '_wrapAllBetaFirmwaresForBoardConfigAndBuildID', ]
 
 def _errNotAValidJsonObject():
-	print "[!] Could not decosde JSON object. Make sure your query is valid."
+	print "[!] Could not decode JSON object. Make sure your query is valid."
 
 # ****************** #
 
@@ -110,3 +116,157 @@ def __getAllBetaFirmwaresForBoardConfigAndBuildID(board_config, build_ID): 	# ge
 		return r.json()
 	except ValueError:
 		_errNotAValidJsonObject()
+
+# ****************** #
+
+def _wrapAllCurrentlySignedFirmwares(): # packs devices IDs, devices properties and device firmwares data into three arrays and returns them. (only the ones with signed firmwares)
+	json_data = __getAllCurrentlySignedFirmwares()
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllFirmwares(): # packs devices IDs, devices properties and device firmwares data into three arrays and returns them.
+	json_data = __getAllFirmwares()
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllCurrentlySignedFirmwaresForBoardConfig(board_config):
+	json_data = __getAllCurrentlySignedFirmwaresForBoardConfig(board_config)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllFirmwaresForBoardConfig(board_config):
+	json_data = __getAllFirmwaresForBoardConfig(board_config)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllFirmwaresForBoardConfigAndBuildID(board_config, build_ID):
+	json_data = __getAllFirmwaresForBoardConfigAndBuildID(board_config, build_ID)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+# ****************** #
+
+def _wrapAllCurrentlySignedBetaFirmwares(): # packs devices IDs, devices properties and device firmwares data into three arrays and returns them. (only the ones with signed firmwares)
+	json_data = __getAllCurrentlySignedBetaFirmwares()
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllBetaFirmwares(): # packs devices IDs, devices properties and device firmwares data into three arrays and returns them.
+	json_data = __getAllBetaFirmwares()
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllCurrentlySignedBetaFirmwaresForBoardConfig(board_config):
+	json_data = __getAllCurrentlySignedBetaFirmwaresForBoardConfig(board_config)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllBetaFirmwaresForBoardConfig(board_config):
+	json_data = __getAllBetaFirmwaresForBoardConfig(board_config)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
+
+def _wrapAllBetaFirmwaresForBoardConfigAndBuildID(board_config, build_ID):
+	json_data = __getAllBetaFirmwaresForBoardConfigAndBuildID(board_config, build_ID)
+	data = {}
+	device_ids = []
+	devices_data = []
+	devices_firmwares = []
+
+	device_ids = list(json_data.keys())	# gets all devices IDs into an array.
+	for i in range(len(json_data)):	# gets all devices properties into an array.
+		devices_data.append(json_data[json_data.keys()[i]])
+	for i in range(len(devices_data)): # gets all devices firmwares into an array.
+		devices_firmwares.append(json_data[json_data.keys()[i]]['firmwares'])
+
+	return device_ids, devices_data, devices_firmwares
