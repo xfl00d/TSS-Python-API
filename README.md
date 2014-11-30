@@ -69,3 +69,4 @@ Suggestions
 This section will suggest some addiction you could make by yourself to make the library better. Some of these are planned to be implemented in the next versions.
 
 1. _Save requests to disk_ - These requests are very heavy. The JSON that you get in response is much data, and this could slow down you program, especially if the user has a slow connection or iNeal server is overloaded. I *highly* suggest you to implement a disk-saving feature, to avoid redundant requests. _**This feature will be added in the next versions.**_
+2. _Implement a nice user interaction_ - The library gives you some high-level functions to improve requests and extend the original API, but it is completely up to you to design a user-interaction system. Make good use of the wrappers and the high-level functions, and create something beautiful!
