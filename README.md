@@ -13,7 +13,7 @@ A super-quick Python implementation for iNeal's TSS API. Written entirely in Pyt
 Features:
 
 - **low-level functions**: Used to request and return JSON data from TSS.
-- ~~**wrapper functions**: Used to convert JSON into more complex data structures. (dictionaries, arrays, etc.)~~ *(To be implemented ASAP)*
+- **wrapper functions**: Used to convert JSON into more complex data structures. (dictionaries, arrays, etc.)
 - ~~**high-level functions**: Used to directly interface with the user.~~ *(To be implemented ASAP)*
 
 Usage
