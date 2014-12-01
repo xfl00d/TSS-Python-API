@@ -114,4 +114,4 @@ This section will suggest some addiction you could make by yourself to make the 
 Contact
 -------
 
-Contact me on Twitter for any kinf of problem/question. https://twitter.com/_xfl00d
+Contact me on Twitter for any kind of problem/question. https://twitter.com/_xfl00d
